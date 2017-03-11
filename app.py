@@ -49,9 +49,10 @@ def handle_message(event):
             bResult, replyMsg = objRating.ratingInput(event.message.text)
             if bResult:
                 line_bot_api.reply_message( event.reply_token, TextSendMessage(text=replyMsg) )
-        else:
-            replyMsg = 'Unsupport event type : %s'%event.message.type
-            line_bot_api.reply_message( event.reply_token, TextSendMessage(text=replyMsg) )
+                return 0 # END of return for text message
+
+    replyMsg = '%s'%event
+    line_bot_api.reply_message( event.reply_token, TextSendMessage(text=replyMsg) )
 
 if __name__ == '__main__':
     app.run(debug=True)
