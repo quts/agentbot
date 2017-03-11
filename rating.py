@@ -1,23 +1,27 @@
 from parser import Parser, DATA_TYPE
 from virustotalapi import VirusTotalAPI
-
-class RATE_RESULT:
-	NORMAL     = 0
-	DANGER     = 1
-	SUSPICIOUS = 2
+from agentbot import RATE_RESULT, REPLY_MESSAGE
 
 class rating(object):
 	def __init__(self):
-		self.ratingResult = RATE_RESULT.NORMAL
+		self.ratingResult = RATE_RESULT.NOT_FOUND
 
 	def ratingInput(self, strInput):
 		dataParser = Parser()
-		dataType, strReturn = dataParser.classify(strInput)
+		dataType, strStringToScan = dataParser.classify(strInput)
 
 		if dataType == DATA_TYPE.TYPE_URL:
 			virustotal = VirusTotalAPI()
-			returnCode, totalscaned, positive = virustotal.scanURL(strReturn)
-			return True, '%s be considered as SAFE in %s scanners(total %s)'%(strReturn, totalscaned-positive, totalscaned)
+			returnCode, totalscaned, positive = virustotal.scanURL(strStringToScan)
+
+			if RATE_RESULT.NOT_FOUND == returnCode:
+				return True, REPLY_MESSAGE.UNKNOWN_URL%strStringToScan
+			elif RATE_RESULT.FOUND == returnCode:
+				if positive > 5 :
+					return True, REPLY_MESSAGE.DANGER_URL%strStringToScan
+				else:
+					return True, REPLY_MESSAGE.NORMAL_URL%strStringToScan
+			return True, '%s be considered as SAFE in %s scanners(total %s)'%(strStringToScan, totalscaned-positive, totalscaned)
 
 		return False, 'No Threat Found'
 

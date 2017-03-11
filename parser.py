@@ -1,8 +1,5 @@
 import re
-
-class DATA_TYPE:
-	TYPE_UNDEFINE = 0
-	TYPE_URL      = 1
+from agentbot import DATA_TYPE
 
 class Parser(object):
 	def __init__(self):

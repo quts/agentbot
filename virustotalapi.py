@@ -1,17 +1,16 @@
-import ConfigParser, os, requests
+import ConfigParser, os, requests, time
+from agentbot import RATE_RESULT
 
 class VirusTotalAPI(object):
 	def __init__(self, configPath = 'config.cfg'):
 			self.publickey = os.environ['VirusTotal_PublicKey']
 
-	def scanURL(self, strURL):
-		# Send scan request to Virus Total
-		params = {'apikey': self.publickey, 'url': strURL}
-		response = requests.post('https://www.virustotal.com/vtapi/v2/url/scan', data=params)
-		json_response = response.json()
+	def busyWaiting(self, intSeconds):
+		now = time.time()
+		while (time.time()-now < intSeconds) :
+			continue
 
-		print json_response
-
+	def scanURL(self, strURL, recurssive=0):
 		# Retrieve scanned report from Virus Total	
 		headers = {
 		  "Accept-Encoding": "gzip, deflate",
@@ -24,7 +23,26 @@ class VirusTotalAPI(object):
 
 		print json_response
 
-		return json_response['response_code'], json_response['total'], json_response['positives']
+		# If data found in VirusTotal or not
+		if json_response['response_code'] == RATE_RESULT.FOUND:
+			return RATE_RESULT.FOUND, json_response['total'], json_response['positives']
+		else:
+			# Send scan request to Virus Total
+			params = {'apikey': self.publickey, 'url': strURL}
+			response = requests.post('https://www.virustotal.com/vtapi/v2/url/scan', data=params)
+			json_response = response.json()
+
+			print json_response
+
+			print 'waiting...'
+			self.busyWaiting(60)
+			print 'finshied...'
+
+			recurssive = recurssive + 1
+			if recurssive < 3:
+				return self.scanURL(strURL, recurssive)
+			else:
+				return RATE_RESULT.NOT_FOUND, 0, 0
 
 if __name__ == '__main__':
 	virustotal = VirusTotalAPI()
