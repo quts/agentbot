@@ -9,6 +9,7 @@ class VirusTotalAPI(object):
 		now = time.time()
 		while (time.time()-now < intSeconds) :
 			time.sleep(1)
+			print 'busy waiting...'
 			continue
 
 	def scanURL(self, strURL, recurssive=0):
