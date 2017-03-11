@@ -36,15 +36,8 @@ class VirusTotalAPI(object):
 
 			print json_response
 
-			print 'waiting...'
-			self.busyWaiting(60)
-			print 'finshied...'
-
-			recurssive = recurssive + 1
-			if recurssive < 3:
-				return self.scanURL(strURL, recurssive)
-			else:
-				return RATE_RESULT.NOT_FOUND, 0, 0
+			# Return NOT_FOUND this time
+			return RATE_RESULT.NOT_FOUND, 0, 0
 
 if __name__ == '__main__':
 	virustotal = VirusTotalAPI()
