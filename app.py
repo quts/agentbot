@@ -20,7 +20,7 @@ handler              = WebhookHandler(CHANNEL_SECRET)
 
 @app.route('/')
 def home():
-    return LOCAL_STRING
+    return '200 : %s'%LOCAL_STRING
 
 @app.route("/callback", methods=['POST'])
 def callback():
