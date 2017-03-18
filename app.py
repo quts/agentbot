@@ -57,6 +57,7 @@ def StickerMessageHandler(event):
     print event
     if event.type == 'message':
         if event.message.type == 'sticker':   
+            print event.message
             line_bot_api.reply_message( event.reply_token, 
                                         StickerSendMessage( package_id=event.message.packageId, 
                                                             sticker_id=event.message.stickerId ) )
