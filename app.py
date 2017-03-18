@@ -47,8 +47,17 @@ def TextMessageHandler(event):
             objRating = rating()
             bResult, replyMsg = objRating.ratingInput(event.message.text)
             if bResult:
-                line_bot_api.reply_message( event.reply_token, TextSendMessage(text=replyMsg) )
-                return 0 # END of text message handling
+                line_bot_api.reply_message( event.reply_token, 
+                                            TextSendMessage( text=replyMsg ) )
+
+@handler.add(MessageEvent, message=StickerMessage)
+def StickerMessageHandler(event):
+    print event
+     if event.type == 'message':
+        if event.message.type == 'sticker':   
+            line_bot_api.reply_message( event.reply_token, 
+                                        StickerSendMessage( package_id=event.message.packageId, 
+                                                            sticker_id=event.message.stickerId ) )
 
 @handler.default()
 def default(event):
