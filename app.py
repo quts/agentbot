@@ -56,10 +56,16 @@ def TextMessageHandler(event):
 def StickerMessageHandler(event):
     print event
     if event.type == 'message':
-        if event.message.type == 'sticker':  
+        if event.message.type == 'sticker': 
+            if int(event.message.package_id) > 4:
+                package_id = 2
+                sticker_id = 45
+            else:
+                package_id=event.message.package_id
+                sticker_id=event.message.sticker_id
             line_bot_api.reply_message( event.reply_token, 
-                                        StickerSendMessage( package_id=event.message.package_id, 
-                                                            sticker_id=event.message.sticker_id ) )
+                                        StickerSendMessage( package_id=package_id, 
+                                                            sticker_id=sticker_id ) )
 
 @handler.default()
 def default(event):
