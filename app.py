@@ -50,9 +50,6 @@ def TextMessageHandler(event):
                 line_bot_api.reply_message( event.reply_token, TextSendMessage(text=replyMsg) )
                 return 0 # END of text message handling
 
-    replyMsg = '%s'%event
-    line_bot_api.reply_message( event.reply_token, TextSendMessage(text=replyMsg) )
-
 @handler.default()
 def default(event):
     print event
