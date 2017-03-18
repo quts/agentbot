@@ -57,11 +57,9 @@ def StickerMessageHandler(event):
     print event
     if event.type == 'message':
         if event.message.type == 'sticker':  
-            # event.message = {"id": "5802409770343", "packageId": "1", "stickerId": "13", "type": "sticker"}
-            print vars(event.message)
             line_bot_api.reply_message( event.reply_token, 
-                                        StickerSendMessage( package_id=event.message.packageId, 
-                                                            sticker_id=event.message.stickerId ) )
+                                        StickerSendMessage( package_id=event.message.package_id, 
+                                                            sticker_id=event.message.sticker_id ) )
 
 @handler.default()
 def default(event):
