@@ -84,4 +84,4 @@ class EventHandler(object):
                                                                                       thumbnail_image_url = 'https://example.com/bot/images/image.jpg',
                                                                                       actions             = PostbackTemplateAction(type  = 'postback',
                                                                                                                                    label = 'View detail',
-                                                                                                                                   text  = 'text')))
+                                                                                                                                   text  = 'text'))))
