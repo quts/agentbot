@@ -10,6 +10,7 @@ from linebot.models import (
     MessageEvent, 
     TextMessage, TextSendMessage, 
     StickerMessage, StickerSendMessage, 
+    TemplateSendMessage, ButtonsTemplate, PostbackTemplateAction
 )
 
 from rating import rating
@@ -74,30 +75,13 @@ class EventHandler(object):
                                         TextSendMessage( text=REPLY_MESSAGE.FRIEND_ADDED ) )
 
     def testFunction(self, event):
-            line_bot_api.reply_message( event.reply_token, TemplateSendMessage({
-              "type": "template",
-              "altText": "this is a buttons template",
-              "template": {
-                  "type": "buttons",
-                  "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
-                  "title": "Menu",
-                  "text": "Please select",
-                  "actions": [
-                      {
-                        "type": "postback",
-                        "label": "Buy",
-                        "data": "action=buy&itemid=123"
-                      },
-                      {
-                        "type": "postback",
-                        "label": "Add to cart",
-                        "data": "action=add&itemid=123"
-                      },
-                      {
-                        "type": "uri",
-                        "label": "View detail",
-                        "uri": "http://example.com/page/123"
-                      }
-                  ]
-              }
-            })
+            line_bot_api.reply_message( event.reply_token, 
+                                        TemplateSendMessage( type="template",
+                                                             altText="this is a buttons template",
+                                                             template=ButtonsTemplate(type                = 'buttons',
+                                                                                      text                = 'Please select',
+                                                                                      title               = 'Menu',
+                                                                                      thumbnail_image_url = 'https://example.com/bot/images/image.jpg',
+                                                                                      actions             = PostbackTemplateAction(type  = 'postback',
+                                                                                                                                   label = 'View detail',
+                                                                                                                                   text  = 'text')))
