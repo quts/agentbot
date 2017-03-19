@@ -1,5 +1,20 @@
+import os
+from flask import Flask, request, abort
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError
+)
 from rating import rating
 import linebot.models
+
+app = Flask(__name__)
+CHANNEL_ACCESS_TOKEN = os.environ['CHANNEL_ACCESS_TOKEN']
+CHANNEL_SECRET       = os.environ['CHANNEL_SECRET']
+LOCAL_STRING         = os.environ['LOCAL_STRING']
+line_bot_api         = LineBotApi(CHANNEL_ACCESS_TOKEN)
+handler              = WebhookHandler(CHANNEL_SECRET)
 
 class EventHandler(object):
     def __init__(self, event):
