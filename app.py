@@ -10,6 +10,7 @@ from linebot.models import (
     MessageEvent, 
     TextMessage, TextSendMessage, 
     StickerMessage, StickerSendMessage,
+    TemplateSendMessage, ButtonsTemplate,
 )
 from rating import rating
 
@@ -65,6 +66,40 @@ def StickerMessageHandler(event):
                 line_bot_api.reply_message( event.reply_token, 
                                             StickerSendMessage( package_id=package_id, 
                                                                 sticker_id=sticker_id ) )
+
+def LeaveEventHandler(event):
+    #{"source": {"groupId": "C3fc91cd1bae9c8988d05d24b4dfa04a6", "type": "group"}, "timestamp": 1489908217481, "type": "leave"}
+def JoinEventHandler(event):
+    #{"replyToken": "2c110ba76aaf4961832c2cc53cc86da2", "source": {"groupId": "C3fc91cd1bae9c8988d05d24b4dfa04a6", "type": "group"}, "timestamp": 1489908317510, "type": "join"}
+    objTemplate = {
+                      "type": "template",
+                      "altText": "this is a buttons template",
+                      "template": {
+                          "type": "buttons",
+                          "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+                          "title": "Menu",
+                          "text": "Please select",
+                          "actions": [
+                              {
+                                "type": "postback",
+                                "label": "Buy",
+                                "data": "action=buy&itemid=123"
+                              },
+                              {
+                                "type": "postback",
+                                "label": "Add to cart",
+                                "data": "action=add&itemid=123"
+                              },
+                              {
+                                "type": "uri",
+                                "label": "View detail",
+                                "uri": "http://example.com/page/123"
+                              }
+                          ]
+                      }
+                    }
+    line_bot_api.reply_message( event.reply_token, TemplateSendMessage(objTemplate) )
+
 
 @handler.default()
 def default(event):
