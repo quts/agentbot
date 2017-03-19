@@ -33,6 +33,8 @@ class EventHandler(object):
         elif event.type == 'join':
             if event.source.type == 'group':
                 return self.GroupJoinEventHandler(event)
+        elif event.type == 'follow'
+                return self.FollowEventHandler(event)
         
         # default handler
         try:
@@ -62,4 +64,9 @@ class EventHandler(object):
             line_bot_api.reply_message( event.reply_token, 
                                         TextSendMessage( text=REPLY_MESSAGE.GROUP_JOINED ) )
 
-    #{"replyToken": "08cc196069c5421284d8806a50e497b3", "source": {"groupId": "C3fc91cd1bae9c8988d05d24b4dfa04a6", "type": "group"}, "timestamp": 1489911066556, "type": "join"}
+    def UnfollowEventHandler(self, event):
+        return 0
+
+    def FollowEventHandler(self, event):
+            line_bot_api.reply_message( event.reply_token, 
+                                        TextSendMessage( text=REPLY_MESSAGE.FRIEND_ADDED ) )
