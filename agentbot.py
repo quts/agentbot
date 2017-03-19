@@ -16,3 +16,4 @@ class REPLY_MESSAGE:
 	UNKNOWN_URL = 'Nobody consider %s is danger'
 
 	GROUP_JOINED = 'Hi All, thanks for the invitation! I am agent Monkey, who want to make your chat room more safety.'
+	FRIEND_ADDED = 'Hi There, thanks for adding me as friend! I am agent Monkey, who want to make your chat room more safety.'
