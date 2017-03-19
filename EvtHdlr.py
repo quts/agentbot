@@ -13,6 +13,8 @@ from linebot.models import (
 )
 
 from rating import rating
+from agentbot import RATE_RESULT, REPLY_MESSAGE
+
 
 app = Flask(__name__)
 CHANNEL_ACCESS_TOKEN = os.environ['CHANNEL_ACCESS_TOKEN']
@@ -26,8 +28,11 @@ class EventHandler(object):
         if event.type == 'message':
             if event.message.type == 'text':
                 return self.TextMessageHandler(event)
-            if event.message.type == 'sticker': 
+            elif event.message.type == 'sticker': 
                 return self.StickerMessageHandler(event)
+        elif event.type == 'join':
+            if event.source.type == 'group':
+                return self.GroupJoinEventHandler(event)
         
         # default handler
         try:
@@ -53,3 +58,8 @@ class EventHandler(object):
             line_bot_api.reply_message( event.reply_token, 
                                         StickerSendMessage( package_id=package_id, 
                                                             sticker_id=sticker_id ) )
+    def GroupJoinEventHandler(self, event):
+            line_bot_api.reply_message( event.reply_token, 
+                                        TextSendMessage( text=REPLY_MESSAGE.GROUP_JOINED ) )
+
+    #{"replyToken": "08cc196069c5421284d8806a50e497b3", "source": {"groupId": "C3fc91cd1bae9c8988d05d24b4dfa04a6", "type": "group"}, "timestamp": 1489911066556, "type": "join"}

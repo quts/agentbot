@@ -14,3 +14,5 @@ class REPLY_MESSAGE:
 	DANGER_URL  = '%s might not a safe website'
 	NORMAL_URL  = '%s is a safe website'
 	UNKNOWN_URL = 'Nobody consider %s is danger'
+
+	GROUP_JOINED = 'Hi All, thanks for the invitation! I am agent Monkey, who want to make your chat room more safety.'
