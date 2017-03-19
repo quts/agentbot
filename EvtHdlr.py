@@ -47,6 +47,8 @@ class EventHandler(object):
             print e
 
     def TextMessageHandler(self, event):
+        if event.message.text == 'give_me_a_test':
+            return self.testFunction(event)
         objRating = rating()
         bResult, replyMsg = objRating.ratingInput(event.message.text)
         if bResult:
@@ -57,11 +59,9 @@ class EventHandler(object):
         if int(event.message.package_id) > 4:
             print "unable to handle stickers out of list"
         else:
-            package_id=event.message.package_id
-            sticker_id=event.message.sticker_id
             line_bot_api.reply_message( event.reply_token, 
-                                        StickerSendMessage( package_id=package_id, 
-                                                            sticker_id=sticker_id ) )
+                                        StickerSendMessage( package_id=event.message.package_id, 
+                                                            sticker_id=event.message.sticker_id ) )
     def GroupJoinEventHandler(self, event):
             line_bot_api.reply_message( event.reply_token, 
                                         TextSendMessage( text=REPLY_MESSAGE.GROUP_JOINED ) )
@@ -72,3 +72,32 @@ class EventHandler(object):
     def FollowEventHandler(self, event):
             line_bot_api.reply_message( event.reply_token, 
                                         TextSendMessage( text=REPLY_MESSAGE.FRIEND_ADDED ) )
+
+    def testFunction(self, event):
+            line_bot_api.reply_message( event.reply_token, TemplateSendMessage({
+              "type": "template",
+              "altText": "this is a buttons template",
+              "template": {
+                  "type": "buttons",
+                  "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+                  "title": "Menu",
+                  "text": "Please select",
+                  "actions": [
+                      {
+                        "type": "postback",
+                        "label": "Buy",
+                        "data": "action=buy&itemid=123"
+                      },
+                      {
+                        "type": "postback",
+                        "label": "Add to cart",
+                        "data": "action=add&itemid=123"
+                      },
+                      {
+                        "type": "uri",
+                        "label": "View detail",
+                        "uri": "http://example.com/page/123"
+                      }
+                  ]
+              }
+            })
