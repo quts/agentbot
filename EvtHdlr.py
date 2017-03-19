@@ -35,6 +35,8 @@ class EventHandler(object):
                 return self.GroupJoinEventHandler(event)
         elif event.type == 'follow':
                 return self.FollowEventHandler(event)
+        elif event.type == 'unfollow':
+                return self.FollowEventHandler(event)
         
         # default handler
         try:
