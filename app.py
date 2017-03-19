@@ -11,7 +11,6 @@ from linebot.models import (
     TextMessage, TextSendMessage, 
 )
 
-from rating import rating
 from EvtHdlr import EventHandler
 
 app = Flask(__name__)

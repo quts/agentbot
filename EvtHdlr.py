@@ -1,4 +1,6 @@
+from rating import rating
 import linebot.models
+
 class EventHandler(object):
 	def __init__(self, event):
 		if event.type == 'message':
