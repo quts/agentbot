@@ -88,5 +88,5 @@ class EventHandler(object):
                                                                                                                                    text  = 'text'))))
         except Exception,e:
             line_bot_api.reply_message( event.reply_token, 
-                                        TextSendMessage( text=e ) )
+                                        TextSendMessage( text='%s'%e ) )
 
