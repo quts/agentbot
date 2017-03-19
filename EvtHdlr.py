@@ -6,8 +6,13 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
+from linebot.models import (
+    MessageEvent, 
+    TextMessage, TextSendMessage, 
+    StickerMessage, StickerSendMessage, 
+)
+
 from rating import rating
-import linebot.models
 
 app = Flask(__name__)
 CHANNEL_ACCESS_TOKEN = os.environ['CHANNEL_ACCESS_TOKEN']
