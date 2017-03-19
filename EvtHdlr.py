@@ -75,6 +75,7 @@ class EventHandler(object):
                                         TextSendMessage( text=REPLY_MESSAGE.FRIEND_ADDED ) )
 
     def testFunction(self, event):
+        try:
             line_bot_api.reply_message( event.reply_token, 
                                         TemplateSendMessage( type="template",
                                                              altText="this is a buttons template",
@@ -85,3 +86,7 @@ class EventHandler(object):
                                                                                       actions             = PostbackTemplateAction(type  = 'postback',
                                                                                                                                    label = 'View detail',
                                                                                                                                    text  = 'text'))))
+        except Exception,e:
+            line_bot_api.reply_message( event.reply_token, 
+                                        TextSendMessage( text=e ) )
+
