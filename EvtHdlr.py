@@ -33,7 +33,7 @@ class EventHandler(object):
         elif event.type == 'join':
             if event.source.type == 'group':
                 return self.GroupJoinEventHandler(event)
-        elif event.type == 'follow'
+        elif event.type == 'follow':
                 return self.FollowEventHandler(event)
         
         # default handler
