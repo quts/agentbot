@@ -52,6 +52,7 @@ class EventHandler(object):
             return self.testFunction(event)
         objRating = rating()
         bResult, replyMsg, dataType = objRating.ratingInput(event.message.text)
+        print bResult, replyMsg, dataType
         if bResult:
             if DATA_TYPE.TYPE_URL == dataType:
                 line_bot_api.reply_message( event.reply_token, 
