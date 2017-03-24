@@ -24,7 +24,7 @@ class REPLY_MESSAGE:
 
 class REPLY_TEMPLATE(object):
     def __init__(self):
-        return True
+        print 'Object Created'
 
     def ButtonsTemplate_URL(self, strURL, strRplyMsg):
         return TemplateSendMessage( alt_text=strRplyMsg,
