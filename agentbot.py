@@ -19,6 +19,8 @@ class REPLY_MESSAGE:
     NORMAL_URL  = '%s is a safe website'
     UNKNOWN_URL = 'Nobody consider %s is danger'
 
+    TEMPLATE_BUTTON_GOTO = 'Go To'
+
     GROUP_JOINED = 'Hi All, thanks for the invitation! I am agent Monkey, who want to make your chat room more safety.'
     FRIEND_ADDED = 'Hi There, thanks for adding me as friend! I am agent Monkey, who want to make your chat room more safety.'
 
@@ -30,4 +32,4 @@ class REPLY_TEMPLATE(object):
         return TemplateSendMessage( alt_text=strRplyMsg,
                                     template=ButtonsTemplate(
                                     text=strURL,
-                                    actions=[ URITemplateAction( label='uri', uri=strURL )]))
+                                    actions=[ URITemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_GOTO, uri=strURL )]))
