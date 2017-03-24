@@ -55,10 +55,13 @@ class EventHandler(object):
         print bResult, replyMsg, dataType
         if bResult:
             if DATA_TYPE.TYPE_URL == dataType:
-                objTemplate = REPLY_TEMPLATE()
-                buttons_template_message = objTemplate.ButtonsTemplate_URL(rating, replyMsg)
+#                objTemplate = REPLY_TEMPLATE()
+#                buttons_template_message = objTemplate.ButtonsTemplate_URL(rating, replyMsg)
                 line_bot_api.reply_message( event.reply_token, 
-                                            buttons_template_message)           
+                                            TemplateSendMessage( alt_text=strRplyMsg,
+                                            template=ButtonsTemplate(
+                                            text=strURL,
+                                            actions=[ URITemplateAction( label='uri', uri=strURL )])))           
             else:
                 line_bot_api.reply_message( event.reply_token, 
                                             TextSendMessage( text=replyMsg ) )
