@@ -51,10 +51,14 @@ class EventHandler(object):
         if event.message.text == 'give_me_a_test':
             return self.testFunction(event)
         objRating = rating()
-        bResult, replyMsg = objRating.ratingInput(event.message.text)
+        bResult, replyMsg, dataType = objRating.ratingInput(event.message.text)
         if bResult:
-            line_bot_api.reply_message( event.reply_token, 
-                                        TextSendMessage( text=replyMsg ) )
+            if DATA_TYPE.TYPE_URL == dataType:
+                line_bot_api.reply_message( event.reply_token, 
+                                            REPLY_TEMPLATE.ButtonsTemplate_URL(rating, replyMsg))           
+            else:
+                line_bot_api.reply_message( event.reply_token, 
+                                            TextSendMessage( text=replyMsg ) )
 
     def StickerMessageHandler(self, event):
         if int(event.message.package_id) > 4:
