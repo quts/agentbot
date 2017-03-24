@@ -53,7 +53,7 @@ class EventHandler(object):
         objRating  = rating()
         dictReturn = objRating.ratingInput(event.message.text)
         print dictReturn
-        if bResult:
+        if dictReturn['Enable']:
             if DATA_TYPE.TYPE_URL == dictReturn['type']:
                 objTemplate = REPLY_TEMPLATE()
                 buttons_template_message = objTemplate.ButtonsTemplate_URL(dictReturn['data'], dictReturn['Message'])
