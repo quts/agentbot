@@ -73,7 +73,7 @@ class EventHandler(object):
                                         TextSendMessage( text=REPLY_MESSAGE.GROUP_JOINED ) )
 
     def UnfollowEventHandler(self, event):
-        return 0
+        print event
 
     def FollowEventHandler(self, event):
             objTemplate = REPLY_TEMPLATE()

@@ -34,13 +34,12 @@ class REPLY_TEMPLATE(object):
     def ButtonsTemplate_URL(self, strURL, strRplyMsg):
         return TemplateSendMessage( alt_text=strRplyMsg,
                                     template=ButtonsTemplate(
-                                    text=strRplyMsg,
-                                    actions=[ URITemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_GOTO, 
-                                                                 uri=strURL )]))
+                                        text=strRplyMsg,
+                                        actions=[ URITemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_GOTO, 
+                                                                     uri=strURL )]))
 
     def ButtonsTemplate_JoinMessage(self):
         return TemplateSendMessage( alt_text=REPLY_MESSAGE.FRIEND_ADDED,
-                                    template=ConfirmTemplate(
-                                    text=REPLY_MESSAGE.FRIEND_ADDED,
-                                    actions=[ MessageTemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_HELP, 
-                                                                     text=REPLY_MESSAGE.HELP_MESSAGE ) ] ) )
+                                    template=ButtonsTemplate( text=REPLY_MESSAGE.FRIEND_ADDED,
+                                                              actions=[ MessageTemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_HELP, 
+                                                                                               text=REPLY_MESSAGE.HELP_MESSAGE ) ] ) )
