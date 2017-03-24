@@ -15,15 +15,15 @@ class rating(object):
 			returnCode, totalscaned, positive = virustotal.scanURL(strStringToScan)
 
 			if RATE_RESULT.NOT_FOUND == returnCode:
-				return True, REPLY_MESSAGE.UNKNOWN_URL%strStringToScan
+				return True, REPLY_MESSAGE.UNKNOWN_URL%strStringToScan, DATA_TYPE.TYPE_URL
 			elif RATE_RESULT.FOUND == returnCode:
 				if positive > 5 :
-					return True, REPLY_MESSAGE.DANGER_URL%strStringToScan
+					return True, REPLY_MESSAGE.DANGER_URL%strStringToScan, DATA_TYPE.TYPE_URL
 				else:
-					return True, REPLY_MESSAGE.NORMAL_URL%strStringToScan
+					return True, REPLY_MESSAGE.NORMAL_URL%strStringToScan, DATA_TYPE.TYPE_URL
 			return True, '%s be considered as SAFE in %s scanners(total %s)'%(strStringToScan, totalscaned-positive, totalscaned)
 
-		return False, 'No Threat Found'
+		return False, 'No Threat Found', DATA_TYPE.TYPE_UNDEFINE
 
 if __name__ == '__main__':
 	objRating = rating()
