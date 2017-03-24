@@ -1,4 +1,8 @@
 # global.py
+from linebot.models import (
+    TemplateSendMessage, ButtonsTemplate, URITemplateAction, 
+)
+
 class RATE_RESULT:
 	NOT_FOUND  = 0
 	FOUND      = 1
