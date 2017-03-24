@@ -43,3 +43,9 @@ class REPLY_TEMPLATE(object):
                                     template=ButtonsTemplate( text=REPLY_MESSAGE.FRIEND_ADDED,
                                                               actions=[ MessageTemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_HELP, 
                                                                                                text=REPLY_MESSAGE.HELP_MESSAGE ) ] ) )
+
+    def ButtonsTemplate_GroupJoinMessage(self):
+        return TemplateSendMessage( alt_text=REPLY_MESSAGE.GROUP_JOINED,
+                                    template=ButtonsTemplate( text=REPLY_MESSAGE.GROUP_JOINED,
+                                                              actions=[ MessageTemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_HELP, 
+                                                                                               text=REPLY_MESSAGE.HELP_MESSAGE ) ] ) )

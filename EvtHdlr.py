@@ -69,25 +69,10 @@ class EventHandler(object):
                                         StickerSendMessage( package_id=event.message.package_id, 
                                                             sticker_id=event.message.sticker_id ) )
     def GroupJoinEventHandler(self, event):
-            confirm_template_message = TemplateSendMessage(
-                                            alt_text='Confirm template',
-                                            template=ConfirmTemplate(
-                                                text='Are you sure?',
-                                                actions=[
-                                                    PostbackTemplateAction(
-                                                        label='postback',
-                                                        text='postback text',
-                                                        data='action=buy&itemid=1'
-                                                    ),
-                                                    MessageTemplateAction(
-                                                        label='message',
-                                                        text='message text'
-                                                    )
-                                                ]
-                                            )
-                                        )
+            objTemplate = REPLY_TEMPLATE()
+            buttons_template_message = objTemplate.ButtonsTemplate_GroupJoinMessage()
             line_bot_api.reply_message( event.reply_token, 
-                                        confirm_template_message )
+                                        buttons_template_message )
 
     def UnfollowEventHandler(self, event):
         print event
