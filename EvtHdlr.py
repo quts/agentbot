@@ -77,9 +77,9 @@ class EventHandler(object):
 
     def FollowEventHandler(self, event):
             objTemplate = REPLY_TEMPLATE()
-            buttons_template_message = objTemplate.ButtonsTemplate_URL(dictReturn['data'], dictReturn['Message'])
+            buttons_template_message = objTemplate.ButtonsTemplate_JoinMessage()
             line_bot_api.reply_message( event.reply_token, 
-                                        TextSendMessage( text=REPLY_MESSAGE.FRIEND_ADDED ) )
+                                        buttons_template_message )
 
 
 
