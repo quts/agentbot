@@ -14,7 +14,7 @@ from linebot.models import (
 )
 
 from rating import rating
-from agentbot import RATE_RESULT, REPLY_MESSAGE
+from agentbot import RATE_RESULT, REPLY_MESSAGE, DATA_TYPE, REPLY_TEMPLATE
 
 
 app = Flask(__name__)
