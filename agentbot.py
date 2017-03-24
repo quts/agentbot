@@ -24,7 +24,7 @@ class REPLY_MESSAGE:
 
 class REPLY_TEMPLATE:
 	def ButtonsTemplate_URL(self, strURL, strRplyMsg):
-		TemplateSendMessage( alt_text=strRplyMsg,
+		return TemplateSendMessage( alt_text=strRplyMsg,
 							 template=ButtonsTemplate(
 							 			text=strURL,
 							 			actions=[ URITemplateAction( label='uri',
