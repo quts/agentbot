@@ -55,8 +55,11 @@ class EventHandler(object):
         print bResult, replyMsg, dataType
         if bResult:
             if DATA_TYPE.TYPE_URL == dataType:
+                objTemplate = REPLY_TEMPLATE()
+                buttons_template_message = objTemplate.ButtonsTemplate_URL(rating, replyMsg)
+                print buttons_template_message
                 line_bot_api.reply_message( event.reply_token, 
-                                            REPLY_TEMPLATE().ButtonsTemplate_URL(rating, replyMsg))           
+                                            buttons_template_message)           
             else:
                 line_bot_api.reply_message( event.reply_token, 
                                             TextSendMessage( text=replyMsg ) )
