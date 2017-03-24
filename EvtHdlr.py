@@ -10,7 +10,7 @@ from linebot.models import (
     MessageEvent, 
     TextMessage, TextSendMessage, 
     StickerMessage, StickerSendMessage, 
-    TemplateSendMessage, ButtonsTemplate, PostbackTemplateAction
+    TemplateSendMessage, ButtonsTemplate, PostbackTemplateAction, MessageTemplateAction,
 )
 
 from rating import rating
