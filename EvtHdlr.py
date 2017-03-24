@@ -50,21 +50,18 @@ class EventHandler(object):
     def TextMessageHandler(self, event):
         if event.message.text == 'give_me_a_test':
             return self.testFunction(event)
-        objRating = rating()
-        bResult, replyMsg, dataType = objRating.ratingInput(event.message.text)
-        print bResult, replyMsg, dataType
+        objRating  = rating()
+        dictReturn = objRating.ratingInput(event.message.text)
+        print dictReturn
         if bResult:
-            if DATA_TYPE.TYPE_URL == dataType:
-#                objTemplate = REPLY_TEMPLATE()
-#                buttons_template_message = objTemplate.ButtonsTemplate_URL(rating, replyMsg)
+            if DATA_TYPE.TYPE_URL == dictReturn['type']:
+                objTemplate = REPLY_TEMPLATE()
+                buttons_template_message = objTemplate.ButtonsTemplate_URL(dictReturn['data'], dictReturn['Message'])
                 line_bot_api.reply_message( event.reply_token, 
-                                            TemplateSendMessage( alt_text=strRplyMsg,
-                                            template=ButtonsTemplate(
-                                            text=strURL,
-                                            actions=[ URITemplateAction( label='uri', uri=strURL )])))           
+                                            buttons_template_message )           
             else:
                 line_bot_api.reply_message( event.reply_token, 
-                                            TextSendMessage( text=replyMsg ) )
+                                            TextSendMessage( text=dictReturn['Message'] ) )
 
     def StickerMessageHandler(self, event):
         if int(event.message.package_id) > 4:

@@ -9,21 +9,29 @@ class rating(object):
     def ratingInput(self, strInput):
         dataParser = Parser()
         dataType, strStringToScan = dataParser.classify(strInput)
+        dictReturn = {}
+        dictReturn['Enable'] = False
+        dictReturn['Message'] = 'No Threat Found'
+        dictReturn['type'] = DATA_TYPE.TYPE_UNDEFINE
 
         if dataType == DATA_TYPE.TYPE_URL:
             virustotal = VirusTotalAPI()
             returnCode, totalscaned, positive = virustotal.scanURL(strStringToScan)
+            dictReturn['Enable'] = True
+            dictReturn['type'] = dataType
+            dictReturn['data'] = strStringToScan
 
+
+            dictReturn['Message'] = '%s be considered as SAFE in %s scanners(total %s)'%(strStringToScan, totalscaned-positive, totalscaned)
             if RATE_RESULT.NOT_FOUND == returnCode:
-                return True, REPLY_MESSAGE.UNKNOWN_URL%strStringToScan, dataType
+                dictReturn['Message'] = REPLY_MESSAGE.UNKNOWN_URL%strStringToScan
             elif RATE_RESULT.FOUND == returnCode:
                 if positive > 5 :
-                    return True, REPLY_MESSAGE.DANGER_URL%strStringToScan, dataType
+                    dictReturn['Message'] = REPLY_MESSAGE.DANGER_URL%strStringToScan
                 else:
-                    return True, REPLY_MESSAGE.NORMAL_URL%strStringToScan, dataType
-            return True, '%s be considered as SAFE in %s scanners(total %s)'%(strStringToScan, totalscaned-positive, totalscaned), dataType
+                    dictReturn['Message'] = REPLY_MESSAGE.NORMAL_URL%strStringToScan
 
-        return False, 'No Threat Found', DATA_TYPE.TYPE_UNDEFINE
+        return dictReturn
 
 if __name__ == '__main__':
     objRating = rating()
