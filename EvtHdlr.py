@@ -81,34 +81,5 @@ class EventHandler(object):
             line_bot_api.reply_message( event.reply_token, 
                                         TextSendMessage( text=REPLY_MESSAGE.FRIEND_ADDED ) )
 
-    def testFunction(self, event):
-        try:
-            buttons_template_message = TemplateSendMessage(
-                                                                alt_text='Buttons template',
-                                                                template=ButtonsTemplate(
-                                                                    thumbnail_image_url='https://example.com/image.jpg',
-                                                                    title='Menu',
-                                                                    text='Please select',
-                                                                    actions=[
-                                                                        PostbackTemplateAction(
-                                                                            label='postback',
-                                                                            text='postback text',
-                                                                            data='action=buy&itemid=1'
-                                                                        ),
-                                                                        MessageTemplateAction(
-                                                                            label='message',
-                                                                            text='message text'
-                                                                        ),
-                                                                        URITemplateAction(
-                                                                            label='uri',
-                                                                            uri='http://example.com/'
-                                                                        )
-                                                                    ]
-                                                                )
-                                                            )
-            line_bot_api.reply_message( event.reply_token, 
-                                        buttons_template_message)
-        except Exception,e:
-            line_bot_api.reply_message( event.reply_token, 
-                                        TextSendMessage( text='%s'%e ) )
+
 
