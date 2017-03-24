@@ -20,9 +20,12 @@ class REPLY_MESSAGE:
     UNKNOWN_URL = 'Nobody consider %s is danger'
 
     TEMPLATE_BUTTON_GOTO = 'Go To'
+    TEMPLATE_BUTTON_HELP = 'What Can I do?'
 
     GROUP_JOINED = 'Hi All, thanks for the invitation! I am agent Monkey, who want to make your chat room more safety.'
     FRIEND_ADDED = 'Hi There, thanks for adding me as friend! I am agent Monkey, who want to make your chat room more safety.'
+
+    HELP_MESSAGE = 'I can scan URLs be mentioned in your chat room, and tell you if it is safe or not!'
 
 class REPLY_TEMPLATE(object):
     def __init__(self):
@@ -32,4 +35,12 @@ class REPLY_TEMPLATE(object):
         return TemplateSendMessage( alt_text=strRplyMsg,
                                     template=ButtonsTemplate(
                                     text=strRplyMsg,
-                                    actions=[ URITemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_GOTO, uri=strURL )]))
+                                    actions=[ URITemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_GOTO, 
+                                                                 uri=strURL )]))
+
+    def ButtonsTemplate_JoinMessage(self):
+        return TemplateSendMessage( alt_text=REPLY_MESSAGE.FRIEND_ADDED,
+                                    template=ButtonsTemplate(
+                                    text=REPLY_MESSAGE.FRIEND_ADDED,
+                                    actions=[ MessageTemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_HELP, 
+                                                                     text=REPLY_MESSAGE.HELP_MESSAGE ) ] ) )

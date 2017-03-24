@@ -48,8 +48,6 @@ class EventHandler(object):
             print e
 
     def TextMessageHandler(self, event):
-        if event.message.text == 'give_me_a_test':
-            return self.testFunction(event)
         objRating  = rating()
         dictReturn = objRating.ratingInput(event.message.text)
         print dictReturn
@@ -78,6 +76,8 @@ class EventHandler(object):
         return 0
 
     def FollowEventHandler(self, event):
+            objTemplate = REPLY_TEMPLATE()
+            buttons_template_message = objTemplate.ButtonsTemplate_URL(dictReturn['data'], dictReturn['Message'])
             line_bot_api.reply_message( event.reply_token, 
                                         TextSendMessage( text=REPLY_MESSAGE.FRIEND_ADDED ) )
 
