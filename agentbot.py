@@ -1,6 +1,6 @@
 # global.py
 from linebot.models import (
-    TemplateSendMessage, ButtonsTemplate, URITemplateAction, MessageTemplateAction
+    TemplateSendMessage, ButtonsTemplate, URITemplateAction, MessageTemplateAction, ConfirmTemplate
 )
 
 class RATE_RESULT:
@@ -40,7 +40,7 @@ class REPLY_TEMPLATE(object):
 
     def ButtonsTemplate_JoinMessage(self):
         return TemplateSendMessage( alt_text=REPLY_MESSAGE.FRIEND_ADDED,
-                                    template=ButtonsTemplate(
+                                    template=ConfirmTemplate(
                                     text=REPLY_MESSAGE.FRIEND_ADDED,
                                     actions=[ MessageTemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_HELP, 
                                                                      text=REPLY_MESSAGE.HELP_MESSAGE ) ] ) )
