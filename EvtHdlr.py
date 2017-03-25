@@ -73,10 +73,10 @@ class EventHandler(object):
                                         StickerSendMessage( package_id=event.message.package_id, 
                                                             sticker_id=event.message.sticker_id ) )
     def LocationMessageHandler(self, event):
-        #event.message.address
+        objTemplate = REPLY_TEMPLATE()
+        buttons_template_message = objTemplate.ButtonsTemplate_Location(event.message.address, event.message.latitude, event.message.longitude)
         line_bot_api.reply_message( event.reply_token, 
-                                    TextSendMessage( text='https://www.google.com.tw/maps/place/%s,%s'%(event.message.latitude,
-                                                                                                        event.message.longitude) ) )
+                                    buttons_template_message )
 
     def GroupJoinEventHandler(self, event):
         objTemplate = REPLY_TEMPLATE()

@@ -37,6 +37,13 @@ class REPLY_TEMPLATE(object):
                                         text=strRplyMsg,
                                         actions=[ URITemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_GOTO, 
                                                                      uri=strURL )]))
+    def ButtonsTemplate_Location(self, strAddress, latitude, longitude):
+        return TemplateSendMessage( alt_text=strAddress,
+                                    template=ButtonsTemplate(
+                                        text=strAddress,
+                                        actions=[ URITemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_GOTO, 
+                                                                     uri='https://www.google.com.tw/maps/place/%s,%s'%(event.message.latitude,
+                                                                                                                       event.message.longitude) )]))
 
     def ButtonsTemplate_JoinMessage(self):
         return TemplateSendMessage( alt_text=REPLY_MESSAGE.FRIEND_ADDED,
