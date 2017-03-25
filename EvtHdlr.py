@@ -35,9 +35,11 @@ class EventHandler(object):
             if event.source.type == 'group':
                 return self.GroupJoinEventHandler(event)
         elif event.type == 'follow':
-                return self.FollowEventHandler(event)
+            return self.FollowEventHandler(event)
         elif event.type == 'unfollow':
-                return self.FollowEventHandler(event)
+            return self.FollowEventHandler(event)
+        elif event.type == 'postback':
+            return self.PostBackEventHandler(event)
         
         # default handler
         try:
@@ -69,19 +71,25 @@ class EventHandler(object):
                                         StickerSendMessage( package_id=event.message.package_id, 
                                                             sticker_id=event.message.sticker_id ) )
     def GroupJoinEventHandler(self, event):
-            objTemplate = REPLY_TEMPLATE()
-            buttons_template_message = objTemplate.ButtonsTemplate_GroupJoinMessage()
-            line_bot_api.reply_message( event.reply_token, 
-                                        buttons_template_message )
+        objTemplate = REPLY_TEMPLATE()
+        buttons_template_message = objTemplate.ButtonsTemplate_GroupJoinMessage()
+        line_bot_api.reply_message( event.reply_token, 
+                                    buttons_template_message )
 
     def UnfollowEventHandler(self, event):
         print event
 
     def FollowEventHandler(self, event):
-            objTemplate = REPLY_TEMPLATE()
-            buttons_template_message = objTemplate.ButtonsTemplate_JoinMessage()
+        objTemplate = REPLY_TEMPLATE()
+        buttons_template_message = objTemplate.ButtonsTemplate_JoinMessage()
+        line_bot_api.reply_message( event.reply_token, 
+                                    buttons_template_message )
+
+    def PostBackEventHandler(self, event):
+        if event.postback.data == 'EVENT_HELP_MESSAGE':
             line_bot_api.reply_message( event.reply_token, 
-                                        buttons_template_message )
+                                        TextSendMessage( text=REPLY_MESSAGE.HELP_MESSAGE ) )           
+
 
 
 
