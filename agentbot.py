@@ -45,13 +45,7 @@ class REPLY_TEMPLATE(object):
                                                                                                text=REPLY_MESSAGE.HELP_MESSAGE ) ] ) )
 
     def ButtonsTemplate_GroupJoinMessage(self):
-        '''
         return TemplateSendMessage( alt_text=REPLY_MESSAGE.GROUP_JOINED,
                                     template=ButtonsTemplate( text=REPLY_MESSAGE.GROUP_JOINED,
                                                               actions=[ MessageTemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_HELP, 
                                                                                                text=REPLY_MESSAGE.HELP_MESSAGE ) ] ) )
-        '''
-        return TemplateSendMessage( alt_text=REPLY_MESSAGE.GROUP_JOINED,
-                                    template=ConfirmTemplate( text=REPLY_MESSAGE.GROUP_JOINED, 
-                                                              actions=[ PostbackTemplateAction( label=REPLY_MESSAGE.TEMPLATE_BUTTON_HELP,
-                                                                                                data='EVENT_HELP_MESSAGE' ) ] ) )
