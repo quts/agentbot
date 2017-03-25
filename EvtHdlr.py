@@ -42,14 +42,6 @@ class EventHandler(object):
             return self.FollowEventHandler(event)
         elif event.type == 'postback':
             return self.PostBackEventHandler(event)
-        
-        # default handler
-        try:
-            print event
-            replyMsg = '%s'%event
-            line_bot_api.reply_message( event.reply_token, TextSendMessage(text=replyMsg) )
-        except Exception,e:
-            print e
 
     def TextMessageHandler(self, event):
         objRating  = rating()
@@ -97,4 +89,3 @@ class EventHandler(object):
         if event.postback.data == 'EVENT_HELP_MESSAGE':
             line_bot_api.reply_message( event.reply_token, 
                                         TextSendMessage( text=REPLY_MESSAGE.HELP_MESSAGE ) )           
-
