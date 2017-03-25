@@ -31,6 +31,8 @@ class EventHandler(object):
                 return self.TextMessageHandler(event)
             elif event.message.type == 'sticker': 
                 return self.StickerMessageHandler(event)
+            elif event.message.type == 'location': 
+                return self.LocationMessageHandler(event)
         elif event.type == 'join':
             if event.source.type == 'group':
                 return self.GroupJoinEventHandler(event)
@@ -70,6 +72,12 @@ class EventHandler(object):
             line_bot_api.reply_message( event.reply_token, 
                                         StickerSendMessage( package_id=event.message.package_id, 
                                                             sticker_id=event.message.sticker_id ) )
+    def LocationMessageHandler(self, event):
+        #event.message.address
+        line_bot_api.reply_message( event.reply_token, 
+                                    TextSendMessage( text='https://www.google.com.tw/maps/place/%s,%s'%(event.message.latitude,
+                                                                                                        event.message.longitude) ) )
+
     def GroupJoinEventHandler(self, event):
         objTemplate = REPLY_TEMPLATE()
         buttons_template_message = objTemplate.ButtonsTemplate_GroupJoinMessage()
@@ -89,7 +97,4 @@ class EventHandler(object):
         if event.postback.data == 'EVENT_HELP_MESSAGE':
             line_bot_api.reply_message( event.reply_token, 
                                         TextSendMessage( text=REPLY_MESSAGE.HELP_MESSAGE ) )           
-
-
-
 
