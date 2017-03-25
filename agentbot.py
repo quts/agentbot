@@ -1,6 +1,6 @@
 # global.py
 from linebot.models import (
-    TemplateSendMessage, ButtonsTemplate, URITemplateAction, MessageTemplateAction, ConfirmTemplate
+    TemplateSendMessage, ButtonsTemplate, URITemplateAction, MessageTemplateAction, ConfirmTemplate, PostbackTemplateAction
 )
 
 class RATE_RESULT:
