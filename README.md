@@ -1,4 +1,4 @@
-# agentbot
+# Project 1 : Chatbot URL scanner
 The project "agentbot" is a chatbot on LINE IM platform to provide users identify URL is malicious or not.
 
 ## How to use it?
